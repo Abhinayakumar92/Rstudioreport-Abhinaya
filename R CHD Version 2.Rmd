@@ -1,16 +1,13 @@
 ---
-title: "HDS assessment report"
+title: "Rstudioreport_Final"
 author: "Abhinaya"
-date: "2025-11-29"
-output:
-  pdf_document: default
-  html_document: default
+date: "2025-11-30"
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
 ## Aim 
 
 To examine the trend in age–sex standardised Coronary Heart Disease hospitalisation rates in Scotland between 2016/17–2018/19 and 2021/22–2023/24 according to the rolling averages" 
@@ -49,8 +46,15 @@ view(CHD_total)
 
 ```{r Data_cleaning}
 CHD_tidy <- CHD_total %>% select (year, period, numerator, measure) %>%  filter( year >= 2017) %>% rename(Hosp_per_year = 'numerator', HospRate_100k = 'measure' )
-CHD_table <- view(CHD_tidy)
 ```
+
+# Renaming the variables to shorten the names in "Period" column
+```{r}
+CHD_tidy %>% mutate(period = gsub(" financial years; 3-year aggregates","", period )) %>% mutate(period = gsub("to","-", period ))
+```
+
+
+
 ## Summary statistics of the data
 
 ```{r summary}
@@ -64,6 +68,11 @@ Plotting a line graph to show the trend line of the change in hospitalisation ra
 ggplot( CHD_tidy,aes(x=year, y=HospRate_100k )) + labs(title = "CHD Hospitalisation Rate in Scotland (2017-2022)", x="Year ( 3 year rolling average)", y= "Rate per 100,000") + geom_line()
 
 ```
+```{r view period table}
+
+data_frame()
+```
+
 
 ## Plot a bar graph
 

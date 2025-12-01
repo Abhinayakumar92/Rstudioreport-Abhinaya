@@ -1,16 +1,13 @@
 ---
-title: "HDS assessment report"
+title: "Rstudioreport_Final"
 author: "Abhinaya"
-date: "2025-11-29"
-output:
-  pdf_document: default
-  html_document: default
+date: "2025-11-30"
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
 ## Aim 
 
 To examine the trend in age–sex standardised Coronary Heart Disease hospitalisation rates in Scotland between 2016/17–2018/19 and 2021/22–2023/24 according to the rolling averages" 
