@@ -1,0 +1,345 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Assessment Version 2},
+  pdfauthor={Abhinaya},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Assessment Version 2}
+\author{Abhinaya}
+\date{2025-12-01}
+
+\begin{document}
+\maketitle
+
+\subsection{Aim}\label{aim}
+
+To examine the trend in age--sex standardised \textbf{Coronary Heart
+Disease hospitalisation rates} in Scotland between financial years
+\textbf{2016/17--2018/19} and \textbf{2021/22--2023/24} according to the
+3-year rolling averages.
+
+The target audience will be primarily the public health
+boards,epidemiologists, hospital administration and research scientists
+in the fields of cardiac medicine. The insights obtained from this study
+will enable them to identify patterns,increase resource allocation and
+create awareness regarding this disease among the public.It will also
+contribute to research as trends form an important analysis in any
+study.
+
+The data obtained has mainly the numbers of hospitilisations and rates
+for the given years. This data does not allow any causal inference, as
+no other factors are mentioned.Also, since it is secondary data, there
+is no control over the quality and the methodology of obtaining it.
+
+The strengths of the summary statistics are that it is easy to
+interpret, and gives a clear snapshot of the mean hospitalisation cases
+in the period. The limitation is that there is no data on the variation
+during individual years. The strength of the bar chart is that it is
+easy to interpret and clearly shows the difference in the rates over the
+years. THe limitation is that since we are considering 3-year rolling
+averages, it is difficult to track individual year rates and plot it on
+a trend line, due to the overlap.
+
+\subsection{Research Question}\label{research-question}
+
+``How have age--sex standardised CHD hospitalisation rates in Scotland
+changed between 2016/17--2018/19 and 2021/22--2023/24 according to the
+3-year rolling averages''
+
+\subsection{Load Packages}\label{load-packages}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'tidyverse' was built under R version 4.5.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 4.5.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'tibble' was built under R version 4.5.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'tidyr' was built under R version 4.5.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'readr' was built under R version 4.5.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'purrr' was built under R version 4.5.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'dplyr' was built under R version 4.5.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'forcats' was built under R version 4.5.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'lubridate' was built under R version 4.5.2
+\end{verbatim}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.6
+## v forcats   1.0.1     v stringr   1.5.2
+## v ggplot2   4.0.1     v tibble    3.3.0
+## v lubridate 1.9.4     v tidyr     1.3.1
+## v purrr     1.2.0     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readr)}
+\FunctionTok{library}\NormalTok{(tidyr)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(here)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'here' was built under R version 4.5.2
+\end{verbatim}
+
+\begin{verbatim}
+## here() starts at C:/Users/abhih/OneDrive/Documents/GitHub/RMarkdownAssessment
+\end{verbatim}
+
+\subsection{Read in data}\label{read-in-data}
+
+The dataset used for the study is the \textbf{coronary heart disease
+(CHD) patient hospitalisations}, in \emph{Scotland}, for the years
+2006-2022, from the
+\href{https://scotland.shinyapps.io/ScotPHO_profiles_tool/}{Scottish
+Public Health Observatory Online profiles Tool}.
+
+-\textbf{Numerator}= Number of patients admitted due to coronary heart
+disease each year.\\
+-\textbf{Denominator} = Total population each year.\\
+-\textbf{Measure} = Rate of admissions per 100,000 persons in the
+population.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CHD\_data }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"ScotPHO\_datatab\_extract\_2025{-}11{-}29.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 20 Columns: 12
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## chr (7): area_code, area_type, area_name, period, type_definition, indicator...
+## dbl (5): year, numerator, measure, upper_confidence_interval, lower_confiden...
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{glimpse}\NormalTok{ (CHD\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 20
+## Columns: 12
+## $ area_code                 <chr> "S00000001", "S00000001", "S00000001", "S000~
+## $ area_type                 <chr> "Scotland", "Scotland", "Scotland", "Scotlan~
+## $ area_name                 <chr> "Scotland", "Scotland", "Scotland", "Scotlan~
+## $ year                      <dbl> 2003, 2004, 2005, 2006, 2007, 2008, 2009, 20~
+## $ period                    <chr> "2002/03 to 2004/05 financial years; 3-year ~
+## $ type_definition           <chr> "Age-sex standardised rate per 100,000", "Ag~
+## $ indicator                 <chr> "Coronary heart disease (CHD) patient hospit~
+## $ numerator                 <dbl> 27182.0, 26465.0, 25603.3, 24778.3, 23717.0,~
+## $ measure                   <dbl> 637.6, 614.5, 587.3, 561.0, 529.3, 500.4, 47~
+## $ upper_confidence_interval <dbl> 645.6, 622.2, 594.8, 568.3, 536.4, 507.2, 48~
+## $ lower_confidence_interval <dbl> 629.8, 606.8, 579.8, 553.8, 522.4, 493.7, 47~
+## $ data_source               <chr> "Public Health Scotland (SMR01)", "Public He~
+\end{verbatim}
+
+\subsection{Tidy data}\label{tidy-data}
+
+\subsubsection{Select main columns ( year, period, numerator,
+measure)}\label{select-main-columns-year-period-numerator-measure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CHD\_main }\OtherTok{\textless{}{-}}\NormalTok{ CHD\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(year, period, numerator, measure) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(year}\SpecialCharTok{\textgreater{}=} \DecValTok{2017}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{rename}\NormalTok{(}\AttributeTok{Hosp\_per\_year =} \StringTok{\textquotesingle{}numerator\textquotesingle{}}\NormalTok{, }\AttributeTok{HospRate\_100k =} \StringTok{\textquotesingle{}measure\textquotesingle{}}\NormalTok{ )  }
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Renaming the variables to shorten the names in ``Period''
+column}\label{renaming-the-variables-to-shorten-the-names-in-period-column}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CHD\_main }\OtherTok{\textless{}{-}}\NormalTok{ CHD\_main }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{period =} \FunctionTok{gsub}\NormalTok{(}\StringTok{" financial years; 3{-}year aggregates"}\NormalTok{,}\StringTok{""}\NormalTok{, period )) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{period =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"to"}\NormalTok{,}\StringTok{"{-}"}\NormalTok{, period ))}
+\FunctionTok{View}\NormalTok{(CHD\_main)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Data Analysis}\label{data-analysis}
+
+\subsubsection{Summary statistics of the
+data}\label{summary-statistics-of-the-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# To check the mean of the hospitalisation numbers and rates for the period}
+\FunctionTok{summary}\NormalTok{(CHD\_main)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       year         period          Hosp_per_year   HospRate_100k  
+##  Min.   :2017   Length:6           Min.   :17952   Min.   :326.7  
+##  1st Qu.:2018   Class :character   1st Qu.:18253   1st Qu.:330.0  
+##  Median :2020   Mode  :character   Median :18676   Median :346.1  
+##  Mean   :2020                      Mean   :18801   Mean   :349.0  
+##  3rd Qu.:2021                      3rd Qu.:19463   3rd Qu.:366.8  
+##  Max.   :2022                      Max.   :19667   Max.   :376.8
+\end{verbatim}
+
+\subsection{Data Visualisation}\label{data-visualisation}
+
+\subsubsection{Plot a bar chart of hospitalisation
+rate}\label{plot-a-bar-chart-of-hospitalisation-rate}
+
+Plotting a bar chart to show the trend line of the change in
+hospitalisation rates over the years.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(CHD\_main, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=} \FunctionTok{str\_wrap}\NormalTok{(period, }\DecValTok{10}\NormalTok{), }\AttributeTok{y=}\NormalTok{ HospRate\_100k)) }\SpecialCharTok{+} \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{fill =} \StringTok{"blue4"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"CHD Hospitalisation Rate in Scotland (2017{-}2022)"}\NormalTok{, }
+       \AttributeTok{x =} \StringTok{"Year (3 year rolling average)"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Rate per 100,000"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{310}\NormalTok{, }\DecValTok{380}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Assessment-Version-2_files/figure-latex/bar-chart-1.pdf}}
+
+\subsection{Interpretation}\label{interpretation}
+
+The bar chart shows a steady decline in the hospitalisation rates of
+coronary heart disease, from the years 2017-2022, depicted by the 3 year
+rolling averages seen in the bar graph.
+
+\end{document}

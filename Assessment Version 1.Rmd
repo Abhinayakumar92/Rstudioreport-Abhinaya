@@ -1,0 +1,86 @@
+---
+title: "RMarkdownAssessment"
+author: "Abhinaya"
+date: "2025-12-01"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Aim
+
+To examine the trend in age–sex standardised **Coronary Heart Disease hospitalisation rates** in Scotland between financial years **2016/17–2018/19** and **2021/22–2023/24** according to the 3-year rolling averages.
+
+The target audience will be primarily the public health boards,epidemiologists, hospital administration and research scientists in the fields of cardiac medicine. The insights obtained from this study will enable them to identify patterns,increase resource allocation and create awareness regarding this disease among the public.It will also contribute to research as trends form an important analysis in any study.
+
+The data obtained has mainly the numbers of hospitalisation and rates for the given years. This data does not allow any causal inference, as no other factors are mentioned.Also, since it is secondary data, there is no control over the quality and the methodology of obtaining it.
+
+The strengths of the summary statistics are that it is easy to interpret, and gives a clear snapshot of the mean hospitalisation cases in the period. The limitation is that there is no data on the variation during individual years. The strength of the bar chart is that it clearly shows the difference in the rates over the years, considering there are few groups to track. THe limitation is that since we are considering 3-year rolling averages, it is difficult to track individual year rates and plot it on a trend line.
+
+## Research Question
+
+“How have age–sex standardised CHD hospitalisation rates in Scotland changed between 2016/17–2018/19 and 2021/22–2023/24 according to the 3-year rolling averages”
+
+## Load Packages
+
+```{r load-package}
+library(tidyverse)
+library(readr)
+library(tidyr)
+library(dplyr)
+library(here)
+```
+
+## Read in data
+
+The dataset used for the study is the **coronary heart disease (CHD) patient hospitalisations**, in *Scotland*, for the years 2006-2022, from the [Scottish Public Health Observatory Online profiles Tool](https://scotland.shinyapps.io/ScotPHO_profiles_tool/).
+
+\-**Numerator**= Number of patients admitted due to coronary heart disease each year.\
+-**Denominator** = Total population each year.\
+-**Measure** = Rate of admissions per 100,000 persons in the population.
+
+```{r import-data}
+CHD_data <- read_csv("ScotPHO_datatab_extract_2025-11-29.csv")
+glimpse (CHD_data)
+```
+
+## Tidy data
+
+### Select main columns ( year, period, numerator, measure)
+
+```{r select columns}
+CHD_main <- CHD_data %>% select(year, period, numerator, measure) %>% filter(year>= 2017) %>% rename(Hosp_per_year = 'numerator', HospRate_100k = 'measure' )  
+```
+
+### Renaming the variables to shorten the names in "Period" column
+
+```{r rename_variables}
+CHD_main <- CHD_main %>% mutate(period = gsub(" financial years; 3-year aggregates","", period )) %>% mutate(period = gsub("to","-", period ))
+View(CHD_main)
+```
+
+## Data Analysis
+
+### Summary statistics of the data
+
+```{r data_summary}
+# To check the mean of the hospitalisation numbers and rates for the period
+summary(CHD_main)
+```
+
+## Data Visualisation
+
+### Plot a bar chart
+
+Plotting a bar chart to show the trend line of the change in hospitalisation rates over the years.
+
+```{r bar-chart, fig_width=10}
+ggplot(CHD_main, aes(x= str_wrap(period, 10), y= HospRate_100k)) + geom_col(fill = "blue4") + labs(title = "CHD Hospitalisation Rate in Scotland (2017-2022)", 
+       x = "Year (3 year rolling average)", 
+       y = "Rate per 100,000") + theme_classic() +
+  coord_cartesian(ylim = c(310, 380))
+```
